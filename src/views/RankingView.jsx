@@ -3,22 +3,34 @@ import {h} from 'hyperapp'
 import CoinInfomation from '../components/CoinInfomation.jsx'
 import CoinInfomationRepository from '../repository/CoinInfomationRepository.js'
 
-export default ({state, action}) => {
+import NowLoading from '../components/Loading.jsx'
+
+const SORT_DESC = ({locate}) => (a, b) => b.quotes.JPY.price - a.quotes.JPY.price
+
+export default () => (state, action) => {
   const fetchCoinInfo = CoinInfomationRepository.getCoinInfos({
     locate : 'JPY'
   })
 
-  const coinInfos = fetchCoinInfo.then(infos => infos.map(info => (
-    <CoinInfomation
-      coinName={info.name}
-      price={info.quotes.JPY.price}
-      locate="￥"
-      rate={info.quotes.JPY.percent_change_1h}
-    />
-  )))
+  const coinInfos = fetchCoinInfo.then(infos =>
+    infos
+      .sort(SORT_DESC)
+      .map(info => (
+        <CoinInfomation
+          coinName={info.name}
+          price={info.quotes.JPY.price}
+          locate="￥"
+          rate={info.quotes.JPY.percent_change_1h}
+        />
+      )))
+
+  const showRanking = async () => {
+    action.refreshCoinRanking({coinInfos : <NowLoading />})
+    action.refreshCoinRanking({coinInfos : await coinInfos})
+  }
 
   return (
-    <div oncreate={async () => action.refreshCoinRanking({coinInfos : await coinInfos})}>
+    <div oncreate={showRanking}>
       {state.coinInfos}
     </div>
   )
