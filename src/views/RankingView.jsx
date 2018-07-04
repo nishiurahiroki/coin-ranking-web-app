@@ -5,7 +5,7 @@ import CoinInfomationRepository from '../repository/CoinInfomationRepository.js'
 
 import NowLoading from '../components/Loading.jsx'
 
-const SORT_DESC = ({locate}) => (a, b) => b.quotes.JPY.price - a.quotes.JPY.price
+const SORT_DESC = (a, b) => b.quotes.JPY.price - a.quotes.JPY.price
 
 export default () => (state, action) => {
   const fetchCoinInfo = CoinInfomationRepository.getCoinInfos({
