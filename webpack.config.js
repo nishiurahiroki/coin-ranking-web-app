@@ -17,8 +17,8 @@ module.exports = {
           cacheDirectory: true,
           presets: ['env'],
           plugins: [
-            ['transform-react-jsx', { 'pragma': 'h' }],
-            ["transform-runtime", {"regenerator": true}],
+            ['transform-react-jsx', {'pragma': 'h' }],
+            ['transform-runtime', {'regenerator': true}],
           ]
         }
       }

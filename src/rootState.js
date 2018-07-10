@@ -1,6 +1,7 @@
 export default {
   pageTitle : '',
   currentPage : () => {},
-  coinInfos : () => {},
-  locate : ''
+  coinRanking : () => {},
+  locate : '',
+  order : 'desc'
 }
