@@ -5,6 +5,6 @@ const SORT = {
   asc : 'up'
 }
 
-export default props => ({order = 'down'}, action) => (
-  <i class={`fa fa-arrow-${SORT[order]}`} style={props.style} onclick={props.onclick}></i>
+export default ({style, onclick}) => ({orderBy = 'down'}) => (
+  <i class={`fa fa-arrow-${SORT[orderBy]}`} style={style} onclick={onclick}></i>
 )

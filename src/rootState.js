@@ -3,5 +3,5 @@ export default {
   currentPage : () => {},
   coinRanking : () => {},
   locate : '',
-  order : 'desc'
+  orderBy : 'desc'
 }

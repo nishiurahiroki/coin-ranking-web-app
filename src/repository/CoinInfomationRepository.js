@@ -1,7 +1,7 @@
 const COIN_INFO_API_URL = 'https://api.coinmarketcap.com/v2/ticker/'
 
 export default class CoinInfomationRepository {
-  static async getCoinInfos({locate = 'JPY', sort = 'price', order = 'desc'}) {
+  static async getCoinInfos({locate = 'JPY', sort = 'price', orderBy = 'desc'}) {
     const result = await fetch(`${COIN_INFO_API_URL}${locate ? `?convert=${locate}` : ''}`)
     if(!result) {
       return []
@@ -21,6 +21,6 @@ export default class CoinInfomationRepository {
     return Object
             .keys(coinInfos)
             .map(coinKey => coinInfos[coinKey])
-            .sort(SORT[order])
+            .sort(SORT[orderBy])
   }
 }

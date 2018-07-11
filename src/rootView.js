@@ -7,18 +7,18 @@ import SortButton from './components/SortButton.jsx'
 
 import CoinInfomationRepository from './repository/CoinInfomationRepository.js'
 
-const BUTTON_BETWEEN_MARGIN = '3.2vw'
+import {BUTTON_BETWEEN_MARGIN} from './const.js'
 
 export default () => (state, action) => (
  <div>
-   <Header title={state.pageTitle} >
+   <Header title={state.pageTitle}>
     <RefreshButton onclick={() => {
-      const coinInfos = CoinInfomationRepository.getCoinInfos({order : state.order})
+      const coinInfos = CoinInfomationRepository.getCoinInfos({orderBy : state.orderBy})
       action.refreshCoinRanking({coinInfos})
     }}/>
     <SortButton style={{marginLeft : BUTTON_BETWEEN_MARGIN}} onclick={() => {
-      const {order} = action.toggleOrder()
-      const coinInfos = CoinInfomationRepository.getCoinInfos({order})
+      const {orderBy} = action.toggleOrderBy()
+      const coinInfos = CoinInfomationRepository.getCoinInfos({orderBy})
       action.refreshCoinRanking({coinInfos})
     }}/>
    </Header>
