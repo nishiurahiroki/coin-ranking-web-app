@@ -1,13 +1,21 @@
-import changeCurrentPage from './actions/changeCurrentPage.js'
-import changePageTitle from './actions/changePageTitle.js'
+import changeCurrentView from './actions/changeCurrentView.js'
+import changeViewTitle from './actions/changeViewTitle.js'
 import refreshCoinRanking from './actions/refreshCoinRanking.js'
 import showCoinRanking from './actions/showCoinRanking'
 import toggleOrderBy from './actions/toggleOrderBy.js'
+import setHeaderIconButtons from './actions/setHeaderIconButtons.js'
+import addHeaderIconButton from './actions/addHeaderIconButton.js'
+import clearHeaderIconButtons from './actions/clearHeaderIconButtons.js'
+import getNowOrderBy from './actions/getNowOrderBy.js'
 
 export default {
-  changeCurrentPage,
-  changePageTitle,
+  changeCurrentView,
+  changeViewTitle,
   refreshCoinRanking,
   showCoinRanking,
-  toggleOrderBy
+  toggleOrderBy,
+  setHeaderIconButtons,
+  addHeaderIconButton,
+  clearHeaderIconButtons,
+  getNowOrderBy
 }

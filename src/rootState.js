@@ -1,7 +1,9 @@
 export default {
-  pageTitle : '',
-  currentPage : () => {},
+  viewTitle : '',
+  currentView : () => {},
   coinRanking : () => {},
   locate : '',
-  orderBy : 'desc'
+  orderBy : 'desc',
+  headerIconButtons : [],
+  coinDetail : () => {}
 }

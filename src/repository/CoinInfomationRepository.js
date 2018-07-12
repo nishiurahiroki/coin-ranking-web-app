@@ -23,4 +23,18 @@ export default class CoinInfomationRepository {
             .map(coinKey => coinInfos[coinKey])
             .sort(SORT[orderBy])
   }
+
+  static async findCoinInfo({coinId, locate = 'JPY'}) {
+    const result = await fetch(`${COIN_INFO_API_URL}${coinId}/${locate ? `?convert=${locate}` : ''}`)
+    if(!result) {
+      return {}
+    }
+
+    const resultJson = await result.json()
+    if(!resultJson) {
+      return {}
+    }
+
+    return resultJson.data
+  }
 }

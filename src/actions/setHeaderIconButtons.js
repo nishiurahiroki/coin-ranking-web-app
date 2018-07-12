@@ -1,0 +1,1 @@
+export default ({headerIconButtons}) => () => ({headerIconButtons})
