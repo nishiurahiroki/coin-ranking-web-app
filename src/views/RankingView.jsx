@@ -47,7 +47,7 @@ export default ({coinInfos, locate = 'JPY'}) => (state, action) => {
   }
 
   return (
-    <span oncreate={initialize}>
+    <div key="rankingView" oncreate={initialize}>
       {coinInfos
         .map(({name, quotes, id}) => (
           <CoinInfomation
@@ -59,6 +59,6 @@ export default ({coinInfos, locate = 'JPY'}) => (state, action) => {
           />
         ))
       }
-    </span>
+    </div>
   )
 }

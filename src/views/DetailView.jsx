@@ -23,9 +23,8 @@ export default props => ({coinDetail}, action) => {
     )
   }
 
-
   return (
-    <span oncreate={initialize} class="siimple-form">
+    <div key="detailView" oncreate={initialize} class="siimple-form">
       <div class="siimple-field">
         <div class="siimple-field-label">名称</div>
         {props.name}
@@ -54,6 +53,6 @@ export default props => ({coinDetail}, action) => {
         <div class="siimple-field-label">発行枚数上限</div>
         {props.maxSupply}
       </div>
-    </span>
+    </div>
   )
 }
