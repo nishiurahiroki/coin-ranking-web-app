@@ -6,13 +6,36 @@ import CoinInfomation from '../components/CoinInfomation.jsx'
 
 import NowLoading from '../components/Loading.jsx'
 
+import RefreshButton from '../components/RefreshButton.jsx'
+import SortButton from '../components/SortButton.jsx'
+
+import {BUTTON_BETWEEN_MARGIN} from '../const.js'
+
 import DetailView from '../views/DetailView.jsx'
 
-export default ({coinInfos, locate = 'JPY'}) => (state, {changeCurrentView, addHeaderIconButton}) => {
+export default ({coinInfos, locate = 'JPY'}) => (state, action) => {
+  const initialize = () => {
+    action.clearHeaderIconButtons()
+    action.addHeaderIconButton(
+      <RefreshButton onclick={() => {
+        const nowOrderBy = action.getNowOrderBy()
+        const coinInfos = CoinInfomationRepository.getCoinInfos({orderBy : nowOrderBy})
+        action.refreshCoinRanking({coinInfos})
+      }}/>
+    )
+    action.addHeaderIconButton(
+      <SortButton style={{marginLeft : BUTTON_BETWEEN_MARGIN}} onclick={() => {
+        const {orderBy} = action.toggleOrderBy()
+        const coinInfos = CoinInfomationRepository.getCoinInfos({orderBy})
+        action.refreshCoinRanking({coinInfos})
+      }}/>
+    )
+  }
+
   const showDetail = async coinId => {
-    changeCurrentView(<NowLoading />)
+    action.changeCurrentView(<NowLoading />)
     const coin = await CoinInfomationRepository.findCoinInfo({coinId})
-    changeCurrentView(
+    action.changeCurrentView(
       <DetailView
         name={coin.name} totalSupply={coin.total_supply}
         maxSupply={coin.max_supply} price={coin.quotes[locate].price}
@@ -24,7 +47,7 @@ export default ({coinInfos, locate = 'JPY'}) => (state, {changeCurrentView, addH
   }
 
   return (
-    <div>
+    <span oncreate={initialize}>
       {coinInfos
         .map(({name, quotes, id}) => (
           <CoinInfomation
@@ -36,6 +59,6 @@ export default ({coinInfos, locate = 'JPY'}) => (state, {changeCurrentView, addH
           />
         ))
       }
-    </div>
+    </span>
   )
 }

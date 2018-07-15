@@ -1,8 +1,31 @@
 import {h} from 'hyperapp'
 
+import BackButton from '../components/BackButton.jsx'
+
+import CoinInfomationRepository from '../repository/CoinInfomationRepository.js'
+
+import NowLoading from '../components/Loading.jsx'
+
+import RankingView from './RankingView.jsx'
+
 export default props => ({coinDetail}, action) => {
+  const initialize = () => {
+    action.clearHeaderIconButtons()
+    action.addHeaderIconButton(
+      <BackButton onclick={async () => {
+        action.changeCurrentView(<NowLoading />)
+        const coinInfos = await CoinInfomationRepository.getCoinInfos({
+          locate : 'JPY',
+          orderBy : action.getNowOrderBy()
+        })
+        action.changeCurrentView(<RankingView coinInfos={coinInfos}/>)
+      }}/>
+    )
+  }
+
+
   return (
-    <div class="siimple-form">
+    <span oncreate={initialize} class="siimple-form">
       <div class="siimple-field">
         <div class="siimple-field-label">名称</div>
         {props.name}
@@ -31,6 +54,6 @@ export default props => ({coinDetail}, action) => {
         <div class="siimple-field-label">発行枚数上限</div>
         {props.maxSupply}
       </div>
-    </div>
+    </span>
   )
 }
