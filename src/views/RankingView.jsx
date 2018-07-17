@@ -34,7 +34,7 @@ export default ({coinInfos, locate = 'JPY'}) => (state, action) => {
     action.addHeaderIconButton(
       <SuggestText
         style={{marginLeft : BUTTON_BETWEEN_MARGIN}}
-        oninput={async ({target, keyCode}) => {
+        oninput={async ({target}) => {
           const searchText = target.value
           if(!searchText) {
             action.setSuggestWords([])
