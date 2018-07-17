@@ -12,8 +12,8 @@ export default ({style, oninput, onSelectValue}) => ({suggestWords}, action) => 
     <input
       oninput={oninput}
       onchange={e => {
-        const targetCoin = Array.prototype.find.call(e.target.list.options, ({value}) => value == e.target.value)
-        onSelectValue(targetCoin.dataset.id)
+        const target = Array.prototype.find.call(e.target.list.options, ({value}) => value == e.target.value)
+        onSelectValue(target.dataset.id)
       }}
       autocomplete="on"
       list="suggest"
