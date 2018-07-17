@@ -46,9 +46,9 @@ export default ({coinInfos, locate = 'JPY'}) => (state, action) => {
           const suggestWords = allCoins.filter(({name}) => name.toLowerCase().startsWith(searchText.toLowerCase()))
           action.setSuggestWords(suggestWords)
         }}
-        onSelectValue={async coinId => {
-          const coinInfo = await CoinInfomationRepository.findCoinInfo({coinId})
-          action.refreshCoinRanking({coinInfos : [coinInfo]})
+        onSelectValue={coinId => {
+          const coinInfo = CoinInfomationRepository.findCoinInfo({coinId})
+          action.refreshCoinRanking({coinInfos : Promise.all([coinInfo])})
         }}
       />
     )
