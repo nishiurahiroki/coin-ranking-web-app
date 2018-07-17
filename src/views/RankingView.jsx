@@ -16,6 +16,7 @@ import DetailView from '../views/DetailView.jsx'
 
 export default ({coinInfos, locate = 'JPY'}) => (state, action) => {
   const initialize = () => {
+    action.setSuggestWords([])
     action.clearHeaderIconButtons()
     action.addHeaderIconButton(
       <RefreshButton onclick={() => {
