@@ -37,4 +37,18 @@ export default class CoinInfomationRepository {
 
     return resultJson.data
   }
+
+  static async getAllCoins() {
+    const result = await fetch('https://api.coinmarketcap.com/v2/listings/')
+    if(!result) {
+      return {}
+    }
+
+    const resultJson = await result.json()
+    if(!resultJson) {
+      return {}
+    }
+
+    return resultJson.data
+  }
 }

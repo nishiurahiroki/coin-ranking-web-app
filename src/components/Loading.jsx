@@ -1,3 +1,3 @@
 import {h} from 'hyperapp'
 
-export default () => (state, action) => <div class="siimple-spinner siimple-spinner--primary"></div>
+export default () => () => <div key="nowLoading" class="siimple-spinner siimple-spinner--primary"></div>

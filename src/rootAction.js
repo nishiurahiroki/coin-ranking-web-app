@@ -7,6 +7,7 @@ import setHeaderIconButtons from './actions/setHeaderIconButtons.js'
 import addHeaderIconButton from './actions/addHeaderIconButton.js'
 import clearHeaderIconButtons from './actions/clearHeaderIconButtons.js'
 import getNowOrderBy from './actions/getNowOrderBy.js'
+import setSuggestWords from './actions/setSuggestWords.js'
 
 export default {
   changeCurrentView,
@@ -17,5 +18,6 @@ export default {
   setHeaderIconButtons,
   addHeaderIconButton,
   clearHeaderIconButtons,
-  getNowOrderBy
+  getNowOrderBy,
+  setSuggestWords
 }

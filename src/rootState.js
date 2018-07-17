@@ -5,5 +5,7 @@ export default {
   locate : '',
   orderBy : 'desc',
   headerIconButtons : [],
-  coinDetail : () => {}
+  coinDetail : () => {},
+  searchCoinText : '',
+  suggestWords : []
 }

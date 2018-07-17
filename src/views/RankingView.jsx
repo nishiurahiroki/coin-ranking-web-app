@@ -8,6 +8,7 @@ import NowLoading from '../components/Loading.jsx'
 
 import RefreshButton from '../components/RefreshButton.jsx'
 import SortButton from '../components/SortButton.jsx'
+import SuggestText from '../components/SuggestText.jsx'
 
 import {BUTTON_BETWEEN_MARGIN} from '../const.js'
 
@@ -29,6 +30,26 @@ export default ({coinInfos, locate = 'JPY'}) => (state, action) => {
         const coinInfos = CoinInfomationRepository.getCoinInfos({orderBy})
         action.refreshCoinRanking({coinInfos})
       }}/>
+    )
+    action.addHeaderIconButton(
+      <SuggestText
+        style={{marginLeft : BUTTON_BETWEEN_MARGIN}}
+        oninput={async ({target, keyCode}) => {
+          const searchText = target.value
+          if(!searchText) {
+            action.setSuggestWords([])
+            return
+          }
+
+          const allCoins = await CoinInfomationRepository.getAllCoins()
+          const suggestWords = allCoins.filter(({name}) => name.toLowerCase().startsWith(searchText.toLowerCase()))
+          action.setSuggestWords(suggestWords)
+        }}
+        onSelectValue={async coinId => {
+          const coinInfo = await CoinInfomationRepository.findCoinInfo({coinId})
+          action.refreshCoinRanking({coinInfos : [coinInfo]})
+        }}
+      />
     )
   }
 

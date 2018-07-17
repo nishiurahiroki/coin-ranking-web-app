@@ -7,7 +7,7 @@ import NowLoading from './components/Loading.jsx'
 import CoinInfomationRepository from './repository/CoinInfomationRepository.js'
 
 import DEFALUT_VIEW from './views/RankingView.jsx'
-const DEFAULT_VIEW_TITLE = '仮想通貨 PRICE RANKING'
+const DEFAULT_VIEW_TITLE = '仮想通貨 PRICE RANKING 100th'
 
 export default () => ({viewTitle, headerIconButtons, currentView, orderBy}, action) => {
   const initialize = async () => {
@@ -17,7 +17,6 @@ export default () => ({viewTitle, headerIconButtons, currentView, orderBy}, acti
     const defaltViewProps = {coinInfos : await coinInfos}
     action.changeCurrentView(<DEFALUT_VIEW {...defaltViewProps}/>)
   }
-
 
   return (
    <div oncreate={initialize}>
