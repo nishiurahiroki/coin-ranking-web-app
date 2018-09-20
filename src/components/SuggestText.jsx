@@ -1,5 +1,7 @@
 import {h} from 'hyperapp'
 
+import CoinInfomationRepository from '../repository/CoinInfomationRepository.js'
+
 const inputStyle = {
   fontFamily: 'FontAwesome',
   fontStyle: 'normal',
@@ -12,7 +14,17 @@ const UNIQUE_ID = Math.random().toString(36).slice(-8)
 export default ({style, oninput, onSelectValue}) => ({suggestWords}, action) => (
   <span style={style}>
     <input
-      oninput={oninput}
+      oninput={async ({target}) => {
+        const searchText = target.value
+        if(!searchText) {
+          action.setSuggestWords([])
+          return
+        }
+
+        const allCoins = await CoinInfomationRepository.getAllCoins()
+        const suggestWords = allCoins.filter(({name}) => name.toLowerCase().startsWith(searchText.toLowerCase()))
+        action.setSuggestWords(suggestWords)
+      }}
       onchange={e => {
         const target = Array.prototype.find.call(e.target.list.options, ({value}) => value == e.target.value)
         onSelectValue(target.dataset.id)

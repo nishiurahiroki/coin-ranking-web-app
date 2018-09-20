@@ -35,17 +35,6 @@ export default ({coinInfos, locate = 'JPY'}) => (state, action) => {
     action.addHeaderIconButton(
       <SuggestText
         style={{marginLeft : BUTTON_BETWEEN_MARGIN}}
-        oninput={async ({target}) => {
-          const searchText = target.value
-          if(!searchText) {
-            action.setSuggestWords([])
-            return
-          }
-
-          const allCoins = await CoinInfomationRepository.getAllCoins()
-          const suggestWords = allCoins.filter(({name}) => name.toLowerCase().startsWith(searchText.toLowerCase()))
-          action.setSuggestWords(suggestWords)
-        }}
         onSelectValue={coinId => {
           const coinInfo = CoinInfomationRepository.findCoinInfo({coinId})
           action.refreshCoinRanking({coinInfos : Promise.all([coinInfo])})
